@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirigiendo...</title>
+</head>
+
+<body>
+  <p>Redirigiendo...</p>
+
+  <script>
+    const parametros = new URLSearchParams(window.location.search);
+
+    const placa = parametros.get("id");
+    const tipo = parametros.get("tipo") || "NFC";
+
+    const api =
+      "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEmO8lr_5ZFBsSBuhXInbXsuIznBdwW2haMBIYD_uLra5UMDpFWN82h/exec"
+      + "?placa=" + encodeURIComponent(placa)
+      + "&tipo=" + encodeURIComponent(tipo);
+
+    fetch(api)
+      .then(respuesta => respuesta.json())
+      .then(datos => {
+
+        if (datos.url) {
+          window.location.href = datos.url;
+        } else {
+          document.body.innerHTML =
+            "<h2>Cliente no encontrado</h2><p>Verifica el ID de la placa.</p>";
+        }
+
+      })
+      .catch(error => {
+        document.body.innerHTML =
+          "<h2>Error</h2><p>No se pudo procesar la solicitud.</p>";
+      });
+  </script>
+
+</body>
+</html>
