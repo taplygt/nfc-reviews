@@ -11,26 +11,26 @@
 
   <p>Redirigiendo...</p>
 
-  <script>
-    const placa = "001";
+ <script>
+  const placa = "001";
 
-    const registro =
-      "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEmO8lr_5ZFBsSBuhXInbXsuIznBdwW2haMBIYD_uLra5UMDpFWN82h/exec"
-      + "?placa=" + placa
-      + "&tipo=NFC";
+  const parametros = new URLSearchParams(window.location.search);
+  const tipo = parametros.get("tipo") || "NFC";
 
-    const googleReviews =
-      "https://search.google.com/local/writereview?placeid=ChIJZQ8BcA4LiYURME1ByoI3DkI";
+  const registro =
+    "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEmO8lr_5ZFBsSBuhXInbXsuIznBdwW2haMBIYD_uLra5UMDpFWN82h/exec"
+    + "?placa=" + encodeURIComponent(placa)
+    + "&tipo=" + encodeURIComponent(tipo);
 
-    fetch(registro, {
-      mode: "no-cors",
-      keepalive: true
-    });
+  const googleReviews =
+    "https://search.google.com/local/writereview?placeid=ChIJZQ8BcA4LiYURME1ByoI3DkI";
 
-    setTimeout(function () {
-      window.location.replace(googleReviews);
-    }, 700);
-  </script>
+  fetch(registro, {
+    mode: "no-cors",
+    keepalive: true
+  });
 
-</body>
-</html>
+  setTimeout(() => {
+    window.location.href = googleReviews;
+  }, 1000);
+</script>
