@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://search.google.com/local/writereview?placeid=ChIJZQ8BcA4LiYURME1ByoI3DkI">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Redirigiendo...</title>
 </head>
+
 <body>
+
   <p>Redirigiendo...</p>
+
+  <script>
+    const placa = "001";
+
+    const registro =
+      "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEmO8lr_5ZFBsSBuhXInbXsuIznBdwW2haMBIYD_uLra5UMDpFWN82h/exec"
+      + "?placa=" + placa
+      + "&tipo=NFC";
+
+    const googleReviews =
+      "https://search.google.com/local/writereview?placeid=ChIJZQ8BcA4LiYURME1ByoI3DkI";
+
+    fetch(registro, {
+      mode: "no-cors",
+      keepalive: true
+    });
+
+    setTimeout(function () {
+      window.location.replace(googleReviews);
+    }, 700);
+  </script>
+
 </body>
 </html>
