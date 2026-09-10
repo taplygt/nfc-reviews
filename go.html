@@ -7,45 +7,47 @@
 </head>
 <body>
 
-  <p>Redirigiendo...</p>
+<p>Redirigiendo...</p>
 
-  <script>
-    const parametros = new URLSearchParams(window.location.search);
+<script>
+  const parametros = new URLSearchParams(window.location.search);
 
-    const placa = parametros.get("placa");
-    const tipo = parametros.get("tipo") || "NFC";
+  const placa = parametros.get("placa");
+  const tipo = parametros.get("tipo") || "NFC";
 
-    const registro =
-      "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEm08lr_5ZFBsSBuhXInbXsuIznBdWW2haMBIYD_uLra5UMDpFWN82h/exec"
-      + "?placa=" + encodeURIComponent(placa)
-      + "&tipo=" + encodeURIComponent(tipo);
+  const registro =
+    "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEm08lr_5ZFBsSBuhXInbXsuIznBdWW2haMBIYD_uLra5UMDpFWN82h/exec"
+    + "?placa=" + encodeURIComponent(placa)
+    + "&tipo=" + encodeURIComponent(tipo);
 
-    if (!placa) {
-      document.body.innerHTML = "<p>Falta el número de placa</p>";
-    } else {
-      fetch("clientes.json")
-        .then(response => response.json())
-        .then(clientes => {
-          const cliente = clientes[placa];
+  if (!placa) {
+    document.body.innerHTML = "<p>Falta el número de placa</p>";
+  } else {
+    fetch("clientes.json")
+      .then(response => response.json())
+      .then(clientes => {
+        const cliente = clientes[placa];
 
-          if (!cliente) {
-            document.body.innerHTML = "<p>Cliente no encontrado</p>";
-            return;
-          }
+        if (!cliente) {
+          document.body.innerHTML = "<p>Cliente no encontrado</p>";
+          return;
+        }
 
-          const ping = new Image();
-ping.src = registro;
+        const img = new Image();
+        img.src = registro;
 
-          setTimeout(() => {
-            window.location.href = cliente.destino;
-          }, 1000);
-        })
-        .catch(error => {
-          console.error(error);
-          document.body.innerHTML = "<p>Error cargando configuración</p>";
-        });
-    }
-  </script>
+        console.log("Registrando:", registro);
+
+        setTimeout(() => {
+          window.location.href = cliente.destino;
+        }, 2000);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.body.innerHTML = "<p>Error cargando configuración</p>";
+      });
+  }
+</script>
 
 </body>
 </html>
