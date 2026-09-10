@@ -2,5 +2,9 @@
   "001": {
     "nombre": "Hacienda La Abuelita",
     "destino":"https://search.google.com/local/writereview?placeid=..."
-  }
+  },
+"002": {
+  "nombre": "Cliente Demo 002",
+  "destino": "https://www.google.com"
 }
+  }
