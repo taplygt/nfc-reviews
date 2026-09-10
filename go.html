@@ -33,10 +33,7 @@
             return;
           }
 
-          fetch(registro, {
-            mode: "no-cors",
-            keepalive: true
-          });
+          navigator.sendBeacon(registro);
 
           setTimeout(() => {
             window.location.href = cliente.destino;
