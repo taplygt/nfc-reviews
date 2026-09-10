@@ -33,7 +33,8 @@
             return;
           }
 
-          navigator.sendBeacon(registro);
+          const ping = new Image();
+ping.src = registro;
 
           setTimeout(() => {
             window.location.href = cliente.destino;
