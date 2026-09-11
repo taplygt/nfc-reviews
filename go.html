@@ -18,15 +18,32 @@
     const webApp =
       "https://script.google.com/macros/s/AKfycbx-74uPUjvChuEmO8lr_5ZFBsSBuhXInbXsuIznBdwW2haMBIYD_uLra5UMDpFWN82h/exec";
 
+    function recibirCliente(datos) {
+      if (!datos || !datos.url) {
+        document.body.innerHTML = "<p>Cliente no encontrado</p>";
+        return;
+      }
+
+      window.location.replace(datos.url);
+    }
+
     if (!placa) {
       document.body.innerHTML = "<p>Falta el número de placa</p>";
     } else {
-      const destino =
+      const script = document.createElement("script");
+
+      script.src =
         webApp +
         "?placa=" + encodeURIComponent(placa) +
-        "&tipo=" + encodeURIComponent(tipo);
+        "&tipo=" + encodeURIComponent(tipo) +
+        "&callback=recibirCliente" +
+        "&v=" + Date.now();
 
-      window.location.replace(destino);
+      script.onerror = function () {
+        document.body.innerHTML = "<p>Error conectando con el sistema</p>";
+      };
+
+      document.body.appendChild(script);
     }
   </script>
 </body>
