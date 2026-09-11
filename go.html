@@ -32,9 +32,10 @@
           document.body.innerHTML = "<p>Cliente no encontrado</p>";
           return;
         }
-
-        const img = new Image();
-        img.src = registro;
+fetch(registro, {
+  mode: "no-cors",
+  keepalive: true
+});
 
         console.log("Registrando:", registro);
 
